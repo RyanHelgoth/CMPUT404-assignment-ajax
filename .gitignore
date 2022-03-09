@@ -36,3 +36,10 @@ nosetests.xml
 .pydevproject
 *~
 *.swp
+
+# Virtual Environment
+venv/
+
+# Editor settings
+.vscode
+
