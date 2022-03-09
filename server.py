@@ -96,8 +96,8 @@ def world():
     '''you should probably return the world here'''
     if flask.request.method == "POST":
         #TODO check if code is correct
-        body = flask_post_json()
-        myWorld.space = body
+        #body = flask_post_json()
+        #myWorld.space = body
         world = jsonify(myWorld.world()) 
         return world
     elif flask.request.method == "GET":

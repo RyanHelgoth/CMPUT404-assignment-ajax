@@ -44,7 +44,6 @@ function sendJSONXMLHTTPRequest(url, objects, reqType, callback) {
                         jsonResponse = JSON.parse(xhr.responseText)
                         callback(jsonResponse);
                     }
-                    
                 }
             } 
             catch(e) {
@@ -161,8 +160,11 @@ function addEntity(entity, data) {
     world[entity] = data;
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just  modified!
-    let url = "/entity/${entity}";
-    let obejects = {name : data}
+    let url = "/entity/" + entity;
+    //TODO cite properly
+    //https://stackoverflow.com/a/11508490
+    //JavaScript is weird
+    let objects = JSON.stringify({[entity] : data})
     sendJSONXMLHTTPRequest(url, objects, "PUT", (response) => {
         console.log(response);
     });
@@ -293,6 +295,7 @@ function update() {
     sendJSONXMLHTTPRequest(url, "", "GET", (response) => {
         world = response;
     });
+    drawFrame();
 }
 
 // 30 frames per second
