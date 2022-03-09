@@ -162,7 +162,8 @@ function addEntity(entity, data) {
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just  modified!
     let url = "/entity/${entity}";
-    sendJSONXMLHTTPRequest(url, entity, "PUT", (response) => {
+    let obejects = {name : data}
+    sendJSONXMLHTTPRequest(url, objects, "PUT", (response) => {
         console.log(response);
     });
 }
@@ -171,7 +172,7 @@ var counter = 0;
 function addEntityWithoutName(data) {
     //var name = "X"+Math.floor((Math.random()*100)+1);
     var name = "X"+(counter++)%100;
-    addEntity(name,data);
+    addEntity(name, data);
 }
 
 // canvas + mouse/touch is complicated 

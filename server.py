@@ -22,7 +22,7 @@
 
 
 import flask
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, jsonify
 import json
 app = Flask(__name__)
 app.debug = True
@@ -80,22 +80,40 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    return None
+    if flask.request.method == "POST":
+        body = flask_post_json()
+        myWorld.set(entity, body) 
+        return jsonify(myWorld.get(entity))
+    elif flask.request.method == "PUT":
+        body = flask_post_json()
+        for key in body:
+            myWorld.update(entity, key, body[key])
+        return jsonify(myWorld.get(entity))
+    
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
     '''you should probably return the world here'''
-    return None
+    if flask.request.method == "POST":
+        #TODO check if code is correct
+        body = flask_post_json()
+        myWorld.space = body
+        world = jsonify(myWorld.world()) 
+        return world
+    elif flask.request.method == "GET":
+        world = jsonify(myWorld.world()) 
+        return world
 
 @app.route("/entity/<entity>")    
 def get_entity(entity):
     '''This is the GET version of the entity interface, return a representation of the entity'''
-    return None
+    return jsonify(myWorld.get(entity)) 
 
 @app.route("/clear", methods=['POST','GET'])
 def clear():
     '''Clear the world out!'''
-    return None
+    myWorld.clear()
+    return jsonify(myWorld.world())
 
 if __name__ == "__main__":
     app.run()
