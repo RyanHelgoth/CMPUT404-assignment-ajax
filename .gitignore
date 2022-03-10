@@ -38,7 +38,7 @@ nosetests.xml
 *.swp
 
 # Virtual Environment
-venv/
+
 
 # Editor settings
 .vscode
