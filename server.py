@@ -80,8 +80,6 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    # entity: 'a':{'x':1, 'y':2}
-    #{[entity] : data}
     if flask.request.method == "POST":
         entityName = entity
         entityData = flask_post_json()

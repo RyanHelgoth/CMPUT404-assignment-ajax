@@ -161,9 +161,10 @@ function addEntity(entity, data) {
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just  modified!
     let url = "/entity/" + entity;
-    let objects = JSON.stringify(data)
+    let objects = JSON.stringify(data);
     sendJSONXMLHTTPRequest(url, objects, "PUT", (response) => {
         //console.log(response);
+        
     });
 }
 
@@ -288,9 +289,12 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 
 function update() {
     //XXX: TODO Get the world from the webservice using a XMLHTTPRequest
+    
+    //NOTE update function being called, but screen not updating
     let url = "/world";
     sendJSONXMLHTTPRequest(url, {}, "GET", (response) => {
         world = response;
+        drawNextFrame();
     });
     drawFrame();
 }

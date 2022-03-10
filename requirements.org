@@ -51,11 +51,11 @@
    - [ ] static/index.html responds to clicks within 100ms on average
    - [ ] Make static/index.html images look nice
    - [x] implement anything marked XXX TODO: in static/index.html
-   - [ ] /clear returns the current state of the world 
+   - [x] /clear returns the current state of the world 
    - [x] PUT returns the object that was PUT. 
    - [x] http://hostname:5000/static/index.html will work to produce the UI
          (so http://127.0.0.1:5000/static/index.html should work and http://localhost:5000/static/index.html should work)
-   - [ ] Doesn't abuse POST, doesn't poll /world with POST method.
+   - [x] Doesn't abuse POST, doesn't poll /world with POST method.
 
  
 ** Restrictions
