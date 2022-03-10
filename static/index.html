@@ -40,10 +40,10 @@ function sendJSONXMLHTTPRequest(url, objects, reqType, callback) {
                 if (xhr.status==200) {
                     //XXX: parse some JSON from the request!
                     //XXX: Pass the data to the callback!
-                    if (xhr.responseType == "json") {
-                        jsonResponse = JSON.parse(xhr.responseText)
-                        callback(jsonResponse);
-                    }
+                    
+                    jsonResponse = JSON.parse(xhr.responseText)
+                    callback(jsonResponse);
+                    
                 }
             } 
             catch(e) {
@@ -161,12 +161,9 @@ function addEntity(entity, data) {
     drawNextFrame(); // (but should we?)
     //XXX: Send a XHTML Request that updates the entity you just  modified!
     let url = "/entity/" + entity;
-    //TODO cite properly
-    //https://stackoverflow.com/a/11508490
-    //JavaScript is weird
-    let objects = JSON.stringify({[entity] : data})
+    let objects = JSON.stringify(data)
     sendJSONXMLHTTPRequest(url, objects, "PUT", (response) => {
-        console.log(response);
+        //console.log(response);
     });
 }
 
@@ -291,8 +288,8 @@ mouse.mousedraggers.push(function(x,y,clicked,e) {
 
 function update() {
     //XXX: TODO Get the world from the webservice using a XMLHTTPRequest
-    let url = "/world"
-    sendJSONXMLHTTPRequest(url, "", "GET", (response) => {
+    let url = "/world";
+    sendJSONXMLHTTPRequest(url, {}, "GET", (response) => {
         world = response;
     });
     drawFrame();
